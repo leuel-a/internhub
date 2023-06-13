@@ -7,32 +7,32 @@
         <div class="forms">
             <div class="form register">
                 <span class="title">Register</span>
-                <form action="#">
+                <form action="../includes/register.inc.php" method="POST">
                     <div class="input-field">
-                        <input type="text" placeholder="Enter your name" required>
+                        <input type="text" placeholder="Enter your name" required name="name">
                         <i class="uil uil-user"></i>
                     </div>
                     <div class="input-field">
-                        <input type="email" placeholder="Enter your email" required>
+                        <input type="email" placeholder="Enter your email" required name="email">
                         <i class="uil uil-envelope icon"></i>
                     </div>
                     <div class="input-field">
-                        <input type="password" class="password" placeholder="Enter your password " required>
+                        <input type="password" class="password" placeholder="Enter your password " required name="pass">
                         <i class="uil uil-lock icon"></i>
                     </div>
                     <div class="input-field">
-                        <input type="password" class="password" placeholder="Enter your password " required>
+                        <input type="password" class="password" placeholder="Confirm your password " required name="passConfirm">
                         <i class="uil uil-lock icon"></i>
                         <i class="uil uil-eye-slash showHidePw"></i>
                     </div>
                     <div class="checkbox-text">
                         <div class="checkbox-content">
-                            <input type="checkbox" id="chooseAccountType">
+                            <input type="checkbox" id="chooseAccountType" name="type">
                             <label for="chooseAccountType" class="text">Student</label>
                         </div>
                     </div>
                     <div class="input-field button">
-                        <input type="button" value="Register Now">
+                        <input type="submit" value="Register Now" name="submit">
                     </div>
                 </form>
 
@@ -41,6 +41,17 @@
                         <a href="/internhub/controllers/login.php" class="text signup-text">Login now</a>
                     </span>
                 </div>
+
+                <?php
+                    $error_msg = array (
+                        "email_taken" => "Email is already taken, login please.",
+                        "password_dont_match" => "Password does not match."
+                    );
+
+                    if (isset($_GET['error'])) {
+                        echo '<p style="color: red; text-align: center; font-size: 15px;">' . $error_msg[$_GET['error']] . "</p>";
+                    }
+                ?>
             </div>
         </div>
     </div>
