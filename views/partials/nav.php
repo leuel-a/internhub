@@ -9,7 +9,7 @@
                     echo '<li class="page__links"><a href="#">My Internships</a></li>';
                     echo '<li class="page__links"><a href="/internhub/includes/logout.inc.php">Log out</a></li>';
                 } else if (isset($_SESSION["recruiterID"])) {
-                    echo '<li class="page__links"><a href="#">My Posts</a></li>';
+                    echo '<li class="page__links"><a href="/internhub/controllers/my_posts.php">My Posts</a></li>';
                     echo '<li class="page__links"><a href="/internhub/includes/logout.inc.php">Log out</a></li>';
                 } else {
                     echo '<li class="page__links"><a href="/internhub/controllers/login.php">Login</a></li>';
