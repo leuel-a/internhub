@@ -9,13 +9,21 @@
     flex-direction: column;
     width: 800px;
     font-family: 'Poppins', sans-serif;
-    background-color: #404146;
-    border-radius: 10px;
+    /* background-color: #404146;
+    border-radius: 10px; */
 }
 
 /* .internship-posts {
     border: 2px solid red;
 } */
+
+.internship-post {
+    background-color: #404146;
+    margin-bottom: 40px;
+    padding: 30px;
+    border: 3px solid rgb(24, 23, 23);
+    border-radius: 10px;
+}
 
 .btn {
     margin-left: 20px;

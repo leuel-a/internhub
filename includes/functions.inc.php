@@ -3,7 +3,7 @@
 require_once "../functions.php";
 
 /**
- * emailCheck - checks for whether an email exits in the database
+ * checks for whether an email exits in the database
  */
 function emailCheck($connection, $email, $type="student") {
     if ($type === "student") {
@@ -33,21 +33,25 @@ function emailCheck($connection, $email, $type="student") {
 }
 
 /**
- * passwordMatch - this function checks whether there is a password match
+ * Checks if two passwords match
+ *
+ * @param string $pass the first password
+ * @param string $passConfirm the second password
+ *
+ * @return bool
  */
 function passwordMatch($pass, $passConfirm) {
     return ($pass === $passConfirm);
 }
 
-
 /**
- * createStudent - creates an new student and adds the student to the
+ * Creates an new student and adds the student to the
  * database
  *
- * Params:
- *  $connection - connection to the database
- *  $name - name of the new student
- *  $pass - password of the new student
+ * @param mysqli $connection - connection to the database
+ * @param string $name - name of the new student
+ * @param string $pass - password of the new student
+ * @return None
  */
 function createStudent($connection, $name, $email, $pass) {
     $query = "INSERT INTO students (studentName, studentEmail, studentPass) VALUES (?, ?, ?);";
@@ -68,14 +72,13 @@ function createStudent($connection, $name, $email, $pass) {
 }
 
 /**
- * correctLogin - checks for correct credentials
+ * Logs in a new student to the database
  *
- * Params:
- *  $connection - connection to the database
- *  $email - email of the user to login
- *  $pass - password of the user to login
+ * @param mysqli $connection - connection to the database
+ * @param string $email - email of the student to login
+ * @param string $pass - password of the student to login
  *
- * Return
+ * @return None
  */
 function loginStudent($connection, $email, $pass) {
     $emailExists = emailCheck($connection, $email);
@@ -100,14 +103,13 @@ function loginStudent($connection, $email, $pass) {
 
 
 /**
- * correctLogin - checks for correct credentials
+ * Logs in a new recruiter
  *
- * Params:
- *  $connection - connection to the database
- *  $email - email of the user to login
- *  $pass - password of the user to login
+ * @param mysqli $connection - connection to the database
+ * @param string $email - email of the recruiter to login
+ * @param string $pass - password of the recruiter to login
  *
- * Return
+ * @return None
  */
 function loginRecruiter($connection, $email, $pass) {
     $emailExists = emailCheck($connection, $email, "recruiter");
@@ -132,13 +134,12 @@ function loginRecruiter($connection, $email, $pass) {
 
 
 /**
- * createNewRecruiter - creates an new student and adds the student to the
+ * Creates an new student and adds the student to the
  * database
  *
- * Params:
- *  $connection - connection to the database
- *  $name - name of the new student
- *  $pass - password of the new student
+ * @param mysqli $connection - connection to the database
+ * @param string $name - name of the new recruiter
+ * @param string $pass - password of the new recruiter
  */
 function createNewRecruiter($connection, $name, $email, $pass) {
     $query = "INSERT INTO recruiters (recruiterName, recruiterEmail, recruiterPass) VALUES (?, ?, ?);";
