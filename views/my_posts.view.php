@@ -14,7 +14,7 @@ $jobs_posted = get_jobs_posted_by_id($conn, $_SESSION['recruiterID']);
 <div class="container">
     <div class="top-information">
         <div class="top-info-text">
-            <h1>Jobs Posted : <?= mysqli_num_rows($jobs_posted) ?></h1>
+            <h2>Jobs Posted : <span id="np"><?= mysqli_num_rows($jobs_posted) ?></span></h2>
         </div>
         <div class="add-new-post">
             <p>You can add a new post here <a href="#"><button id="add-btn">Add</button></a></p>
@@ -22,55 +22,28 @@ $jobs_posted = get_jobs_posted_by_id($conn, $_SESSION['recruiterID']);
     </div>
     <div class="new-post">
         <div class="directions">
-            <p>Enter all the information in the given fields</p>
+            <p><strong>Enter all the information in the given fields</strong>. <br><br> For the<span id="text-format"> Description, Requirements, Qualifications, and Benefit </span>enter one entry per line.</p>
         </div>
         <form action="" method="POST" id="submit-new-post">
             <label for="postTitle">Title</label>
-            <input type="text" name="postTitle"><br>
+            <input type="text" name="postTitle" id="postTitle">
             <label for="postDescription">Description</label>
-            <textarea name="postDescription" id="postDescription"></textarea><br>
+            <textarea name="postDescription" id="postDescription" cols="30" rows="3"></textarea>
             <label for="postRequirement">Post Requirements</label>
-            <textarea name="postRequirement" id="postRequirement" class="postRequirement"></textarea><br>
+            <textarea name="postRequirement" id="postRequirement" class="postRequirement" cols="30" rows="10"></textarea>
             <label for="postQualification">Qualification</label>
-            <textarea name="postQualification" id="postQualification"></textarea><br>
+            <textarea name="postQualification" id="postQualification" cols="30" rows="10"></textarea>
             <label for="postBenefit">Benefit</label>
-            <textarea name="postBenefit" id="postBenefit"></textarea><br>
+            <textarea name="postBenefit" id="postBenefit" cols="30" rows="10"></textarea>
             <label for="deadline">Deadline</label>
-            <input type="date" name="deadline" id="deadline"><br>
-            <input type="submit" name="submit" id="submit">
+            <input type="date" name="deadline" id="deadline">
+            <div class="form-btn">
+                <button id="close-btn">close</button>
+                <input type="submit" name="submit" id="submit">
+            </div>
         </form>
-        <div class="exit">
-            <button id="close-btn">close</button>
-        </div>
     </div>
-    <div class="internship-posts">
-        <?php
-            $rows = mysqli_fetch_all($jobs_posted);
-            // Dynamically render the output to match the posts posted
-            // by the particular recruiter
-        ?>
-        <div class="internship-post">
-            <div class="post-title">
-                <h1>Post 1</h1>
-            </div>
-            <div class="post-description">
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Suscipit nemo exercitationem, quam veritatis quis aliquam!</p>
-            </div>
-            <div class="post-requirements">
-                <ul>
-                    <ul>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Placeat, doloribus!</ul>
-                    <ul>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Placeat, doloribus!</ul>
-                    <ul>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Placeat, doloribus!</ul>
-                    <ul>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Placeat, doloribus!</ul>
-                    <ul>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Placeat, doloribus!</ul>
-                </ul>
-            </div>
-            <div class="post-action">
-                <button class="btn save">Save</button>
-                <button class="btn apply">Apply</button>
-            </div>
-        </div>
-    </div>
+    <div class="internship-posts"></div>
 </div>
 
 <script src="../scripts/my_posts.js"></script>

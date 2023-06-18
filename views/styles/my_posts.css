@@ -7,6 +7,14 @@
     flex-direction: column;
 }
 
+.directions {
+    text-align: center;
+}
+
+#text-format {
+    border-bottom: 2px solid black;
+}
+
 .top-information {
     display: flex;
     justify-content: space-evenly;
@@ -36,6 +44,55 @@
     flex-direction: column;
     align-items: center;
     font-family: 'Poppins', sans-serif;
+    color: black;
+    border: 2px solid rgb(27, 27, 27);
+    border-radius: 10px;
+    width: 600px;
+    margin: 0 auto;
+    background-color: rgb(150, 146, 146);
+}
+
+#submit-new-post {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: minmax(50px, auto);
+    column-gap: 50px;
+    row-gap: 50px;
+}
+
+.form-btn {
+    grid-column: span 2;
+    display: flex;
+    margin-bottom: 50px;
+    justify-content: center;
+}
+
+#close-btn, #submit {
+    font-family: 'Poppins', sans-serif;
+    margin-left: 10px;
+    padding: 9px 25px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+
+#close-btn {
+    margin-right: 10px;
+    background-color: rgb(142, 141, 145);
+}
+
+#submit {
+    background-color: rgb(99, 161, 175);
+}
+
+#close-btn:hover {
+    background-color: rgb(55, 56, 56);
     color: white;
-    border: 2px solid red;
+}
+
+#submit:hover {
+    background-color: rgb(28, 70, 80);
+    color: white;
 }
