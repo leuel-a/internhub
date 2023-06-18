@@ -10,10 +10,11 @@ $(document).ready(() => {
     console.log('Close Clicked');
     $('.new-post').hide();
   });
+});
 
-
-
-  $('#submit-new-post').on('submit',  (event) => {
+// Handle submitting a new post
+$(() => {
+  $('#submit-new-post').on('submit',  function(event) {
     event.preventDefault();
 
     const formData = $(this).serialize();
@@ -24,6 +25,7 @@ $(document).ready(() => {
       url: '../includes/my_posts.inc.php',
       data: formData,
       success: (response) => {
+        console.log(response);
         // location.reload();
       }, error: (xhr, status, error) => {
         // Handle error incase of the user submitted bad data

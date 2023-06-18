@@ -30,11 +30,17 @@ $jobs_posted = get_jobs_posted_by_id($conn, $_SESSION['recruiterID']);
             <label for="postDescription">Description</label>
             <textarea name="postDescription" id="postDescription"></textarea><br>
             <label for="postRequirement">Post Requirements</label>
-            <textarea name="postRequirement" id="postRequirement" class="postRequirement"></textarea>
-            <input type="submit" name="submit">
+            <textarea name="postRequirement" id="postRequirement" class="postRequirement"></textarea><br>
+            <label for="postQualification">Qualification</label>
+            <textarea name="postQualification" id="postQualification"></textarea><br>
+            <label for="postBenefit">Benefit</label>
+            <textarea name="postBenefit" id="postBenefit"></textarea><br>
+            <label for="deadline">Deadline</label>
+            <input type="date" name="deadline" id="deadline"><br>
+            <input type="submit" name="submit" id="submit">
         </form>
         <div class="exit">
-            <a href="#"><button id="close-btn">close</button></a>
+            <button id="close-btn">close</button>
         </div>
     </div>
     <div class="internship-posts">
@@ -46,48 +52,6 @@ $jobs_posted = get_jobs_posted_by_id($conn, $_SESSION['recruiterID']);
         <div class="internship-post">
             <div class="post-title">
                 <h1>Post 1</h1>
-            </div>
-            <div class="post-description">
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Suscipit nemo exercitationem, quam veritatis quis aliquam!</p>
-            </div>
-            <div class="post-requirements">
-                <ul>
-                    <ul>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Placeat, doloribus!</ul>
-                    <ul>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Placeat, doloribus!</ul>
-                    <ul>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Placeat, doloribus!</ul>
-                    <ul>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Placeat, doloribus!</ul>
-                    <ul>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Placeat, doloribus!</ul>
-                </ul>
-            </div>
-            <div class="post-action">
-                <button class="btn save">Save</button>
-                <button class="btn apply">Apply</button>
-            </div>
-        </div>
-        <div class="internship-post">
-            <div class="post-title">
-                <h1>Post 2</h1>
-            </div>
-            <div class="post-description">
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Suscipit nemo exercitationem, quam veritatis quis aliquam!</p>
-            </div>
-            <div class="post-requirements">
-                <ul>
-                    <ul>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Placeat, doloribus!</ul>
-                    <ul>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Placeat, doloribus!</ul>
-                    <ul>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Placeat, doloribus!</ul>
-                    <ul>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Placeat, doloribus!</ul>
-                    <ul>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Placeat, doloribus!</ul>
-                </ul>
-            </div>
-            <div class="post-action">
-                <button class="btn save">Save</button>
-                <button class="btn apply">Apply</button>
-            </div>
-        </div>
-        <div class="internship-post">
-            <div class="post-title">
-                <h1>Post 3</h1>
             </div>
             <div class="post-description">
                 <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Suscipit nemo exercitationem, quam veritatis quis aliquam!</p>

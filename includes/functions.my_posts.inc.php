@@ -22,3 +22,20 @@ function get_jobs_posted_by_id($conn, $recruiterID) {
 
     return mysqli_stmt_get_result($stmt);
 }
+
+/**
+ * Converts an array to a string based on the provided delimiter
+ *
+ * @param array $array the array to be processed
+ * @param string $delimiter the delimiter to be used
+ * @return string
+ */
+function arrayToString($array, $delimiter) {
+    $result = "";
+
+    foreach ($array as $value) {
+        $result .= $value;
+        $result .= $delimiter;
+    }
+    return $result;
+}
