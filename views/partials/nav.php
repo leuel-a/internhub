@@ -6,7 +6,7 @@
             <li class="page__links"><a href="/internhub/controllers/about.php">About</a></li>
             <?php
                 if (isset($_SESSION["studentID"])) {
-                    echo '<li class="page__links"><a href="#">My Internships</a></li>';
+                    echo '<li class="page__links"><a href="/internhub/controllers/my_internships.php">My Internships</a></li>';
                     echo '<li class="page__links"><a href="/internhub/includes/logout.inc.php">Log out</a></li>';
                 } else if (isset($_SESSION["recruiterID"])) {
                     echo '<li class="page__links"><a href="/internhub/controllers/my_posts.php">My Posts</a></li>';

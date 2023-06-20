@@ -1,6 +1,7 @@
 <?php
 
 require_once "../functions.php";
+require_once "dbh.inc.php";
 
 /**
  * checks for whether an email exits in the database
@@ -157,4 +158,147 @@ function createNewRecruiter($connection, $name, $email, $pass) {
     mysqli_stmt_close($stmt);
 
     header("location: ../controllers/register.php?error=none");
+}
+
+
+/**
+ * Applies a student to a particular internship
+ *
+ * @param number $sID the ID of the current student that is applying
+ * @param number $postID the post ID of the current post ID that the student is applying to
+ * @param mysqli $connection connection to the database
+ *
+ * @return None
+ */
+function applyInternship($sID, $postID, $connection) {
+    $query = "INSERT INTO student_internships VALUES (?, ?, ?, ?)";
+    $stmt = mysqli_stmt_init($connection);
+
+    if (!mysqli_stmt_prepare($stmt, $query)) {
+        header("location: ../index.php?error=stmt_error");
+        exit();
+    }
+
+    $date = date('Y-m-d');
+    $status = "applied";
+    mysqli_stmt_bind_param($stmt,"iiss", $sID, $postID, $date, $status);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+}
+
+/**
+ * Checks if a student has already applied for an internship
+ *
+ * @param number $sID the ID of the current student that is applying
+ * @param number $postID the post ID of the current post ID that the student is applying to
+ * @param mysqli $connection connection to the database
+ *
+ * @return bool
+ */
+function checkAlreadyApplied($sID, $postID, $connection) {
+    $query = "SELECT applicationStatus FROM student_internships WHERE sID = ? AND pID = ?";
+    $stmt = mysqli_stmt_init($connection);
+
+    if (!mysqli_stmt_prepare($stmt, $query)) {
+        header("location: ../index.php?error=stmt_error");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "ii", $sID, $postID);
+    mysqli_stmt_execute($stmt);
+
+    $result_data = mysqli_stmt_get_result($stmt);
+    $num_rows = mysqli_num_rows($result_data);
+    if ($num_rows === 0) {
+        return False;
+    }
+
+    $data = mysqli_fetch_assoc($result_data);
+    if ($data['applicationStatus'] === 'applied') {
+        return True;
+    }
+    return False;
+}
+
+/**
+ * Checks if a student has already saved an internship
+ *
+ * @param number $sID the ID of the current student that is applying
+ * @param number $postID the post ID of the current post ID that the student is applying to
+ * @param mysqli $connection connection to the database
+ *
+ * @return None
+ */
+function checkIfSaved($sID, $postID, $connection) {
+    $query = "SELECT applicationStatus FROM student_internships WHERE sID = ? AND pID = ?";
+    $stmt = mysqli_stmt_init($connection);
+
+    if (!mysqli_stmt_prepare($stmt, $query)) {
+        header("location: ../index.php?error=stmt_error");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "ii", $sID, $postID);
+    mysqli_stmt_execute($stmt);
+
+    $result_data = mysqli_stmt_get_result($stmt);
+    $num_rows = mysqli_num_rows($result_data);
+    if ($num_rows === 0) {
+        return False;
+    }
+
+    $data = mysqli_fetch_assoc($result_data);
+    if ($data['applicationStatus'] === 'saved') {
+        return True;
+    }
+    return False;
+}
+
+/**
+ * Changes the status of the application for a particular internship
+ * made by a student
+ *
+ * @param number $sID the ID of the current student that is applying
+ * @param number $postID the post ID of the current post ID that the student is applying to
+ * @param mysqli $connection connection to the database
+ *
+ * @return bool
+ */
+function applySavedInternship($sID, $postID, $connection) {
+    $query = "UPDATE student_internships SET applicationStatus = ? WHERE sID = ? AND pID = ?";
+    $stmt = mysqli_stmt_init($connection);
+
+    if (!mysqli_stmt_prepare($stmt, $query)) {
+        header("location: ../index.php?error=stmt_error");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt,"sii", "applied", $sID, $postID);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+}
+
+/**
+ * Saves a student to a particular internship
+ *
+ * @param number $sID the ID of the current student that is applying
+ * @param number $postID the post ID of the current post ID that the student is applying to
+ * @param mysqli $connection connection to the database
+ *
+ * @return None
+ */
+function saveInternship($sID, $postID, $connection) {
+    $query = "INSERT INTO student_internships VALUES (?, ?, ?, ?)";
+    $stmt = mysqli_stmt_init($connection);
+
+    if (!mysqli_stmt_prepare($stmt, $query)) {
+        header("location: ../index.php?error=stmt_error");
+        exit();
+    }
+
+    $date = date('Y-m-d');
+    $status = "saved";
+    mysqli_stmt_bind_param($stmt,"iiss", $sID, $postID, $date, $status);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
 }

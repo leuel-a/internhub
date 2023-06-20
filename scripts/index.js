@@ -1,26 +1,27 @@
 #!/usr/bin/node
 
 $(() => {
-const xhr = new XMLHttpRequest();
+  const xhr = new XMLHttpRequest();
 
-xhr.open('GET', '../internhub/includes/index.fetch.inc.php');
-xhr.send();
+  xhr.open('GET', '../internhub/includes/index.fetch.inc.php');
+  xhr.send();
 
-xhr.onload = function() {
-    if (xhr.status === 200) {
-    const data = JSON.parse(xhr.responseText);
-    const posts = $('.internship-posts');
-    posts.empty();
-    load_posts(data);
-    } else {
-    console.log("Error: " + xhr.status);
-    }
-}
+  xhr.onload = function() {
+      if (xhr.status === 200) {
+        const data = JSON.parse(xhr.responseText);
+        const posts = $('.internship-posts');
+        posts.empty();
+        load_posts(data);
+      } else {
+        console.log("Error: " + xhr.status);
+      }
+  }
 });
 
 
 function load_posts(data, type="student") {
     for (const post of data) {
+        id = post.postID
         title = post.postTitle;
         description = post.postDescription;
         requirement = post.postRequirement.split(";");
@@ -35,7 +36,7 @@ function load_posts(data, type="student") {
         newPost.append(newPostTitle);
         parent.append(newPost);
 
-        const newDescription = $('<div class="post-description">' + description +'<p></p></div>');
+        const newDescription = $('<div class="post-description"><p>' + description +'</p></div>');
         newPost.append(newDescription);
 
         const newRequirements = $('<div class="post-requirements"></div>');
@@ -72,14 +73,14 @@ function load_posts(data, type="student") {
         newPost.append(newDeadline);
 
         const postAction = $('<div class="post-action"></div>');
-        const saveBtn = $('<button class="btn save">Save</button>');
-        const applyBtn = $('<button class="btn apply">Apply</button>')
+        const saveBtn = $('<button class="btn save" data-post-id="' + id + '">Save</button>');
+        const applyBtn = $('<button class="btn apply" data-post-id="' + id + '">Apply</button>');
 
         postAction.append(saveBtn);
         postAction.append(applyBtn);
 
         if (type === "student"){
-        newPost.append(postAction);
+            newPost.append(postAction);
         }
     }
 }

@@ -45,7 +45,8 @@
                 <?php
                     $error_msg = array (
                         "email_taken" => "Email is already taken, login please.",
-                        "password_dont_match" => "Password does not match."
+                        "password_dont_match" => "Password does not match.",
+                        "none" => "Successfully registered, please login"
                     );
 
                     if (isset($_GET['error'])) {

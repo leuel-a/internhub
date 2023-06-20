@@ -1,83 +1,30 @@
 #!/usr/bin/node
 
-$(document).ready(() => {
-  $('.new-post').hide();
-  $('#add-btn').on('click', () => {
-    $('.new-post').show();
-  });
-
-  $('#close-btn').on('click', () => {
-    console.log('Close Clicked');
-    $('.new-post').hide();
-  });
-});
-
-// Handle submitting a new post
-$(() => {
-  $('#submit-new-post').on('submit', function (event) {
-    event.preventDefault();
-
-    const formData = $(this).serialize();
-
-    // Send AJAX request to server
-    $.ajax({
-      type: 'POST',
-      url: '../includes/my_posts.inc.php',
-      data: formData,
-      success: (response) => {
-        const posts = $('.internship-posts');
-        posts.empty();
-
-        const xhr = new XMLHttpRequest();
-
-        xhr.open('GET', '../includes/my_posts.fetch.inc.php');
-        xhr.send();
-
-        xhr.onload = function () {
-          if (xhr.status === 200) {
-            const numPosts = $('#np');
-            const data = JSON.parse(xhr.responseText);
-            numPosts.text(data.length);
-            console.log(data.length);
-            load_posts(data, 'recruiter');
-          } else {
-            console.log('Error: ' + xhr.status);
-          }
-        };
-      },
-      error: (xhr, status, error) => {
-        // Handle error incase of the user submitted bad data
-      }
-    });
-  });
-});
-
-// Upon page load the jobs posted by the recruiter need to be
-// fetched from the server. After that get the get the information
-// and dynamically render the screen and output all the job posts
-
 $(() => {
   const xhr = new XMLHttpRequest();
 
-  xhr.open('GET', '../includes/my_posts.fetch.inc.php');
+  xhr.open('GET', '../includes/my_internships.fetch.php');
   xhr.send();
 
   xhr.onload = function () {
     if (xhr.status === 200) {
       const data = JSON.parse(xhr.responseText);
+      console.log(data);
       const posts = $('.internship-posts');
       posts.empty();
-      load_posts(data, 'recruiter');
+      load_myInternships(data, 'recruiter');
     } else {
       console.log('Error: ' + xhr.status);
     }
   };
 });
 
-function load_posts (data, type = 'student') {
+function load_myInternships (data, type = 'applied') {
   const count = 0;
 
   for (const post of data) {
+    aDate = post.aDate;
+    appStatus = post.appStatus;
     title = post.postTitle;
     description = post.postDescription;
     requirement = post.postRequirement.split(';');
@@ -87,9 +34,26 @@ function load_posts (data, type = 'student') {
 
     const parent = $('.internship-posts');
     const newPost = $('<div class="internship-post"></div>');
-    const newPostTitle = $('<div class="post-title"><h1>' + title + '</h1></div>');
+    const newPostTitleHeader = $('<div class="post-title"></div>');
+    const newPostTitle = $('<h1>'+ title +'</h1>')
 
-    newPost.append(newPostTitle);
+    // Status of application post
+    console.log(appStatus);
+    const titleSub = $('<div class="title-sub"></div>');
+    if (appStatus === 'applied') {
+      const statusSpan = $('<span class="status apply">Applied</span>');
+      titleSub.append(statusSpan);
+    } else {
+      const statusSpan = $('<span class="status saved">Saved</span>');
+      titleSub.append(statusSpan);
+    }
+
+    const date = $('<div class="date">' + aDate + '</div>')
+    titleSub.append(date);
+
+    newPostTitleHeader.append(newPostTitle);
+    newPostTitleHeader.append(titleSub);
+    newPost.append(newPostTitleHeader);
     parent.append(newPost);
 
     const newDescription = $('<div class="post-description"><p>' + description + '</p></div>');
@@ -129,8 +93,8 @@ function load_posts (data, type = 'student') {
     newPost.append(newDeadline);
 
     const postAction = $('<div class="post-action"></div>');
-    const saveBtn = $('<button class="btn apply" data-post-id="' + id + '">Save</button>');
-    const applyBtn = $('<button class="btn apply" data-post-id="' + id + '">Apply</button>');
+    const saveBtn = $('<button class="btn save">Save</button>');
+    const applyBtn = $('<button class="btn apply">Apply</button>');
     const rid = $('<input type="hidden" value=' + post.rID + '>');
 
     postAction.append(saveBtn);

@@ -46,3 +46,30 @@
 .save:hover {
     background-color: rgb(169, 179, 179);
 }
+
+.post-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.post-title .apply {
+    background-color: rgb(165, 63, 63);
+    padding: 5px;
+    border-radius: 3px;
+    margin-bottom: 8px;
+}
+
+.saved {
+    background-color: rgb(23, 158, 23);
+    padding: 5px;
+    border-radius: 3px;
+    margin-bottom: 8px;
+
+}
+
+.title-sub {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
