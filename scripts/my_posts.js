@@ -65,6 +65,7 @@ $(() => {
   xhr.onload = function () {
     if (xhr.status === 200) {
       const data = JSON.parse(xhr.responseText);
+      console.log(data);
       const posts = $('.internship-posts');
       posts.empty();
       load_posts(data, 'recruiter');
@@ -129,13 +130,11 @@ function load_posts (data, type = 'student') {
     newPost.append(newDeadline);
 
     const postAction = $('<div class="post-action"></div>');
-    const saveBtn = $('<button class="btn apply" data-post-id="' + id + '">Save</button>');
-    const applyBtn = $('<button class="btn apply" data-post-id="' + id + '">Apply</button>');
-    const rid = $('<input type="hidden" value=' + post.rID + '>');
+    const saveBtn = $('<button class="btn apply">Save</button>');
+    const applyBtn = $('<button class="btn apply">Apply</button>');
 
     postAction.append(saveBtn);
     postAction.append(applyBtn);
-    postAction.append(rid);
 
     if (type === 'student') {
       newPost.append(postAction);

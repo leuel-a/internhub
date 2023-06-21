@@ -1,7 +1,7 @@
 #!/usr/bin/node
 
 $(() => {
-  const xhr = new XMLHttpRequest();
+    const xhr = new XMLHttpRequest();
 
   xhr.open('GET', '../internhub/includes/index.fetch.inc.php');
   xhr.send();

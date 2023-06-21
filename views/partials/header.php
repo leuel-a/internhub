@@ -34,6 +34,6 @@
         }
     ?>
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
-    <title>InternHuB | Home</title>
+    <title>InternHuB</title>
 </head>
 <body>

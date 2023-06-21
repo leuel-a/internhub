@@ -10,7 +10,7 @@ function emailCheck($connection, $email, $type="student") {
     if ($type === "student") {
         $query = "SELECT * FROM students WHERE studentEmail = ?;";
     } else {
-        $query = "SELECT * FROM recruiters WHERE recruiterEmail = ?;";
+        $query = "SELECT    * FROM recruiters WHERE recruiterEmail = ?;";
     }
 
     $stmt = mysqli_stmt_init($connection);

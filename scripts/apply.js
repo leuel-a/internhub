@@ -3,6 +3,7 @@
 $(() => {
   // I need to use an event delegation because the apply btns are actually
   // dynamically generated
+
   $('.internship-posts').on('click', '.apply', function () {
     const postID = $(this).data('post-id');
     const xhr = new XMLHttpRequest();
